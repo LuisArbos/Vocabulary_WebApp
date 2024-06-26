@@ -107,7 +107,7 @@ Vocabulary_WebApp/
 
 3. **Run the development server** :
     ```bash
-        npm start
+    npm start
     ```
 
 ## Running the App
@@ -121,7 +121,7 @@ To run the app using Docker:
 
 2. **Build and run containers**:
     ```bash
-        docker-compose up --build
+    docker-compose up --build
     ```
 
 ## Future Enhancements
