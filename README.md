@@ -62,68 +62,67 @@ Vocabulary_WebApp/
 ## Setup Instructions
 ### Backend Setup
 1. **Navigate to the backend directory**:
-```bash
-cd Vocabulary_WebApp/backend
-```
+    ```bash
+    cd Vocabulary_WebApp/backend
+    ```
 
 2. **Create and activate a virtual environment**:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
 
 3. **Install dependencies**:
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 4. **Run migrations**:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
 
 5. **Create a superuser**:
-```bash
-python manage.py createsuperuser
-```
+    ```bash
+    python manage.py createsuperuser
+    ```
 
 6. **Run the development server**:
-```bash
+    ```bash
     python manage.py runserver
-```
+    ```
 
  ### Frontend Setup
 
 1. **Navigate to the frontend directory**:
-```bash
-cd Vocabulary_WebApp/frontend
-```
+    ```bash
+    cd Vocabulary_WebApp/frontend
+    ```
 
 2. **Install dependencies**:
-```bash
-npm install
-```
+    ```bash
+    npm install
+    ```
 
 3. **Run the development server** :
-```bash
-    npm start
-```
+    ```bash
+        npm start
+    ```
 
 ## Running the App
 
 To run the app using Docker:
 
 1. **Navigate to the project root directory**:
-```bash
-cd Vocabulary_WebApp
-```
+    ```bash
+    cd Vocabulary_WebApp
+    ```
 
 2. **Build and run containers**:
-
-```bash
-    docker-compose up --build
-```
+    ```bash
+        docker-compose up --build
+    ```
 
 ## Future Enhancements
 
