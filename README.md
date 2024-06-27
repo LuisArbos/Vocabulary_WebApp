@@ -32,10 +32,10 @@ Vocabulary WebApp is a comprehensive language learning platform designed to help
 ```plaintext
 Vocabulary_WebApp/
 ├── backend/
-│   ├── my_vocab_app/
-│   ├── apps/
-│   │   ├── users/
-│   │   ├── vocabulary/
+│   ├── vocabulary_webapp/
+│   |   ├── apps/
+│   │   |   ├── users/
+│   │   |   ├── vocabulary/
 │   ├── manage.py
 │   ├── requirements.txt
 │   └── db.sqlite3
