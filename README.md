@@ -38,7 +38,7 @@ Vocabulary_WebApp/
 │   │   |   ├── vocabulary/
 │   ├── manage.py
 │   ├── requirements.txt
-│   └── db.sqlite3
+│   └── db
 ├── frontend/
 │   ├── public/
 │   ├── src/
