@@ -1,5 +1,5 @@
 from django.db import models
-from vocabulary.models import Word
+from ..vocabulary.models import Word
 
 # Create your models here.
 class User(models.Model):

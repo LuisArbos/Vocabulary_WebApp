@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
-from .models import Test
+from .models import Language
 
 # Create your views here.
-def test(request):
-    items = Test.objects.all()
+def language(request):
+    items = Language.objects.all()
     return render(request, "test.html", {"tests": items})
