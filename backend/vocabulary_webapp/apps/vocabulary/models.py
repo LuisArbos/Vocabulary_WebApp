@@ -14,6 +14,7 @@ class Language(models.Model):
 
 class Concept(models.Model):
     concept = models.CharField(max_length=100, unique=True)
+    topic = models.IntegerField(default=0)
 
 class Word(models.Model):
     word = models.CharField(max_length=100)
