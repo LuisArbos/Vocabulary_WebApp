@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #101720;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #352f36;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #b9b9b9;
+}
+
+.navbar .nav-link {
+    color: #ffffff; /* White text */
+}
+
+.navbar .nav-link:hover {
+    color: #f8f9fa; /* Lighter color on hover */
+}
+
+.navbar-brand {
+    color: #ffffff; /* White text for brand */
+}
+
+.navbar-brand:hover {
+    color: #f8f9fa; /* Lighter color on hover */
+}
+
+.navbar .dropdown-menu a {
+    color: black;
+}
+
+.navbar .dropdown-menu a:hover {
+    background-color: #f4f4f4;
+}
+
+.dropdown-menu {
+    background-color: #343a40; /* Example color */
+}
+
+.dropdown-item {
+    color: #ffffff; /* White text */
+}
+
+.dropdown-item:hover {
+    background-color: #495057; /* Darker background on hover */
+}
+
+.flag-icon {
+    width: 30px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 8px; /* Space between flag and text */
+}
+
+.container {
+    padding: 20px;
+}
+
+.central-message {
+    margin-top: 50px;
+}
+
+.central-message .btn {
+    margin: 10px;
+}
+
+.btn-primary {
+    background-color: #28a745; 
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #218838; 
+}
+
+.btn-secondary {
+    background-color: #ffc107; 
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: #e0a800; 
+}

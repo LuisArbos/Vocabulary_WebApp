@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Select Language{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="text-center mt-5">
+    <h2>Select a language to practice</h2>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <a href="{% url 'practice_language' 'de' %}">
+                <img src="{% static 'img/de_flag.png' %}" alt="German" class="img-fluid" width="200">
+                <p>German</p>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'practice_language' 'ro' %}">
+                <img src="{% static 'img/ro_flag.png' %}" alt="Romanian" class="img-fluid" width="200">
+                <p>Romanian</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

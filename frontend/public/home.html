@@ -1,5 +1,13 @@
 {% extends "base.html" %} 
+
 {% block title %} Home Page {% endblock %}
+
 {% block content %}
-<p>this is the home page</p>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to VocabApp!</h1>
+    <p class="lead">Practice your vocabulary in various languages.</p>
+    <hr class="my-4">
+    <p>Log in or register to track your progress, or click below to start practicing now.</p>
+    <a class="btn btn-primary" href="{% url 'practice' %}">Let's Practice</a>
+    <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
 {% endblock %}

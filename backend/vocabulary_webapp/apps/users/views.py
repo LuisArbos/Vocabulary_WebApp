@@ -33,4 +33,10 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("login")
+    return redirect("home")
+
+def change_language(request, language):
+    activate(language)
+    response = redirect("home")
+    response.set_cookies('django_language', language)
+    return response

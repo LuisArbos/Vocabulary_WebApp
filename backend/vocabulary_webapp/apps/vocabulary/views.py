@@ -5,3 +5,10 @@ from .models import Language
 def language(request):
     items = Language.objects.all()
     return render(request, "test.html", {"tests": items})
+
+def practice_view(request):
+    return render(request, 'language_selection.html')
+
+def practice_language_view(request, language):
+    context = {'language': language}
+    return render(request, 'practice.html', context)
