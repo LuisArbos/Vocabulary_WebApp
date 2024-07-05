@@ -6,24 +6,12 @@ body {
 }
 
 .navbar {
-    background-color: #352f36;
-}
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar li {
-    float: left;
+    background-color: #352f36 !important;
 }
 
 .navbar a {
-    display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
@@ -47,42 +35,42 @@ body {
     color: #f8f9fa; /* Lighter color on hover */
 }
 
-.navbar .dropdown-menu a {
-    color: black;
-}
-
-.navbar .dropdown-menu a:hover {
-    background-color: #f4f4f4;
-}
-
-.dropdown-menu {
+.navbar .dropdown-menu {
     background-color: #343a40; /* Example color */
+    min-width: 50px;
 }
 
-.dropdown-item {
-    color: #ffffff; /* White text */
-}
-
-.dropdown-item:hover {
-    background-color: #495057; /* Darker background on hover */
+.navbar .dropdown-menu a {
+    display: flex;
+    justify-content: center; /* Center the flags */
 }
 
 .flag-icon {
     width: 30px; /* Set the desired width */
     height: auto; /* Maintain aspect ratio */
-    margin-right: 8px; /* Space between flag and text */
+    margin: 5px 0px;
+}
+
+.final-text {
+    padding-top: 40px;
+    text-align: center;
 }
 
 .container {
-    padding: 20px;
+    padding : 20;
 }
 
-.central-message {
-    margin-top: 50px;
-}
-
-.central-message .btn {
-    margin: 10px;
+.container-secondary {
+    position: relative;
+    height: 600px;
+    width: 1000px;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 20px;
+    background-color: #f2f4f8;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
@@ -111,4 +99,195 @@ body {
 
 .btn-secondary:hover {
     background-color: #e0a800; 
+}
+
+.btn {
+    height: 60px;
+    width: 400px;
+    margin: 20px auto;
+    box-shadow: 10px 10px 30px rgb(254, 215, 188);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.login,
+.signup {
+    font-size: 22px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.slider {
+    height: 60px;
+    width: 200px;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, rgb(255, 195, 110), rgb(255, 146, 91));
+    position: absolute;
+    margin: 20px auto;
+    left: 300px;
+    transition: all 0.5s ease-in-out;
+}
+
+.moveslider {
+    left: 500px;
+}
+
+.form-section {
+    height: 500px;
+    width: 200%;
+    padding: 20px 0;
+    display: flex;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    left: 0;
+}
+
+.form-section-move {
+    left: -100%;
+}
+
+.login-box,
+.signup-box {
+    width: 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    gap: 50px;
+}
+
+.signup-box {
+    gap: 30px;
+}
+
+.ele {
+    height: 60px;
+    width: 80%;
+    outline: none;
+    border: none;
+    color: rgb(77, 77, 77);
+    background-color: rgb(240, 240, 240);
+    border-radius: 50px;
+    padding-left: 30px;
+    font-size: 18px;
+}
+
+.clkbtn {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, rgb(255, 195, 110), rgb(255, 146, 91));
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 650px) {
+    .container {
+        height: 600px;
+        width: 90%;
+    }
+
+    .btn {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .slider {
+        height: 50px;
+        width: 100px;
+        left: 50px;
+    }
+
+    .moveslider {
+        left: 150px;
+    }
+
+    .form-section {
+        width: 200%;
+    }
+
+    .form-section-move {
+        left: -50%;
+    }
+
+    .login-box,
+    .signup-box {
+        width: 50%;
+    }
+
+
+    .ele {
+        height: 50px;
+        width: 90%;
+        font-size: 15px;
+    }
+
+    .clkbtn {
+        height: 50px;
+        width: 130px;
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        height: 600px;
+        width: 90%;
+    }
+
+    .btn {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .login,
+    .signup {
+        font-size: 19px;
+    }
+
+    .slider {
+        width: 50%;
+        left: 0;
+    }
+
+    .moveslider {
+        left: 50%;
+    }
+
+    .form-section {
+        width: 200%;
+    }
+
+    .form-section-move {
+        left: -50%;
+    }
+
+    .login-box,
+    .signup-box {
+        width: 50%;
+    }
+
+    .ele {
+        height: 50px;
+        width: 90%;
+        font-size: 15px;
+    }
+
+    .clkbtn {
+        height: 50px;
+        width: 130px;
+        font-size: 19px;
+    }
 }

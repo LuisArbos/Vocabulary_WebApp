@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+
+{% block title %} Home Page {% endblock %}
+
+{% block button_practice %}Practicar ahora{% endblock %}
+{% block button_login %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenido a VocabApp!</h1>
+    <p class="lead">Practica vocabulario en varios idiomas.</p>
+    <div class="container container-secondary">
+        <div class="slider"></div>
+        <div class="btn">
+            <button class="login">Iniciar Sesión</button>
+            <button class="signup">Registrarse</button>
+        </div>
+        <div class="form-section">
+            <div class="login-box">
+                <input type="email" class="email ele" placeholder="tuemail@email.com">
+                <input type="password" class="password ele" placeholder="Contraseña">
+                <button class="clkbtn">Iniciar sesión</button>
+            </div>
+            <div class="signup-box">
+                <input type="text" class="name ele" placeholder="Introduce tu nombre">
+                <input type="email" class="email ele" placeholder="tuemail@email.com">
+                <input type="password" class="password ele" placeholder="Contraseña">
+                <input type="password" class="password ele" placeholder="Confirma contraseña">
+                <button class="clkbtn">Crear cuenta</button>
+            </div>
+        </div>
+    </div>
+    <p class="final-text">Inicia sesión o regístrate para seguir tu progreso, o haz click abajo para empezar a practicar ya.</p>
+    <a class="btn btn-primary" href="{% url 'practice' %}">Practicar ahora</a>
+    {% load static %}
+    <script src="{% static 'js/index.js' %}"></script>
+</div>
+{% endblock %}
