@@ -2,7 +2,7 @@
 
 {% block title %} Home Page {% endblock %}
 
-{% block button_practice %}Practicar ahora{% endblock %}
+{% block button_practice %}<a class="nav-link" href="{% url 'es_practice_view' %}">Practicar ahora</a>{% endblock %}
 {% block button_login %}Iniciar Sesión{% endblock %}
 
 {% block content %}
@@ -32,7 +32,7 @@
         </div>
     </div>
     <p class="final-text">Inicia sesión o regístrate para seguir tu progreso, o haz click abajo para empezar a practicar ya.</p>
-    <a class="btn btn-primary" href="{% url 'practice' %}">Practicar ahora</a>
+    <a class="btn btn-primary" href="{% url 'es_practice_view' %}">Practicar ahora</a>
     {% load static %}
     <script src="{% static 'js/index.js' %}"></script>
 </div>

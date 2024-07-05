@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Select Language{% endblock %}
+{% block title %}Selecciona Idioma{% endblock %}
+
+{% block button_practice %}<a class="nav-link" href="{% url 'es_practice_view' %}">Practicar ahora</a>{% endblock %}
+{% block button_login %}Iniciar Sesión{% endblock %}
 
 {% block content %}
 {% load static %}
 <div class="text-center mt-5">
-    <h2>Select a language to practice</h2>
+    <h2>Selecciona el idioma a practicar</h2>
     <div class="row mt-4">
         <div class="col-md-6">
-            <a href="{% url 'en_practice_language' 'de' %}">
+            <a href="{% url 'es_practice_language' 'de' %}">
                 <img src="{% static 'img/de_flag.png' %}" alt="German" class="img-fluid" width="200">
-                <p>German</p>
+                <p>Alemán</p>
             </a>
         </div>
         <div class="col-md-6">
-            <a href="{% url 'en_practice_language' 'ro' %}">
+            <a href="{% url 'es_practice_language' 'ro' %}">
                 <img src="{% static 'img/ro_flag.png' %}" alt="Romanian" class="img-fluid" width="200">
-                <p>Romanian</p>
+                <p>Rumano</p>
             </a>
         </div>
     </div>

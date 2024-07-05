@@ -10,15 +10,13 @@ body {
 }
 
 .navbar a {
-    color: white;
+    color: #ffffff;
     text-align: center;
     text-decoration: none;
 }
-
 .navbar a:hover {
-    background-color: #b9b9b9;
+    color: #f8f9fa;
 }
-
 .navbar .nav-link {
     color: #ffffff; /* White text */
 }
