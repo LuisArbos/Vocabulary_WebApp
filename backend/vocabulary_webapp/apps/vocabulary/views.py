@@ -7,8 +7,9 @@ def language(request):
     return render(request, "test.html", {"tests": items})
 
 def practice_view(request):
+    print("Practice view requested.")
     return render(request, 'language_selection.html')
 
 def practice_language_view(request, language):
     context = {'language': language}
-    return render(request, 'practice.html', context)
+    return render(request, 'practice_language.html', context)

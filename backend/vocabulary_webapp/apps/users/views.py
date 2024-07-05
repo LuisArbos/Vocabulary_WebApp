@@ -1,11 +1,21 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.utils.translation import activate
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm, LoginForm
 
 # Create your views here.
 def home(request):
-    return render(request, "home.html")
+    context = {
+        'current_template': 'home.html'
+    }
+    return render(request, 'home.html', context)
+
+def home_es(request):
+    context = {
+        'current_template': 'home_es.html'
+    }
+    return render(request, 'home_es.html', context)
 
 def register(request):
     if request.method == "POST":
@@ -37,6 +47,6 @@ def logout_view(request):
 
 def change_language(request, language):
     activate(language)
-    response = redirect("home")
-    response.set_cookies('django_language', language)
+    response = redirect('home_es' if language == 'es' else 'home')
+    response.set_cookie('django_language', language)
     return response
