@@ -5,6 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm, LoginForm
 
 # Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
+'''
 def home(request):
     context = {
         'current_template': 'home.html'
@@ -50,3 +54,5 @@ def change_language(request, language):
     response = redirect('home_es' if language == 'es' else 'home')
     response.set_cookie('django_language', language)
     return response
+
+'''
