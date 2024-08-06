@@ -1,7 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import BaseLayout from './BaseLayout';
+import authService from './Auth/authService';
 
-const Home = () => (
+const Home = () => {
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [signupName, setSignupName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [signupPassword2, setSignupPassword2] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await authService.login(loginEmail, loginPassword);
+      console.log('Success!!')
+      // Handle success (e.g., show a success message or redirect)
+    } catch (error) {
+      // Handle error (e.g., show error message)
+      console.error(error);
+    }
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      await authService.register(signupEmail, signupPassword, signupPassword2);
+      console.log('Success!!')
+      // Handle success (e.g., show a success message or redirect)
+    } catch (error) {
+      // Handle error (e.g., show error message)
+      console.error(error);
+    }
+  };
+  return (
   <BaseLayout currentLan="EN">
     <div className="jumbotron">
       <h1 className="display-4">Welcome to VocabApp!</h1>
@@ -9,16 +41,20 @@ const Home = () => (
       <div className="container container-secondary">
         <div className="form-section">
           <div className="login-box">
-            <input type="email" className="email ele" placeholder="youremail@email.com" />
-            <input type="password" className="password ele" placeholder="password" />
-            <button className="clkbtn">Login</button>
+            <form onSubmit={handleLogin}>
+              <input type="email" className="email ele" placeholder="youremail@email.com" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)}/>
+              <input type="password" className="password ele" placeholder="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}/>
+              <button type="Submit" className="clkbtn">Login</button>
+            </form>
           </div>
           <div className="signup-box">
-            <input type="text" className="name ele" placeholder="Enter your name" />
-            <input type="email" className="email ele" placeholder="youremail@email.com" />
-            <input type="password" className="password ele" placeholder="password" />
-            <input type="password" className="password ele" placeholder="Confirm password" />
-            <button className="clkbtn">Signup</button>
+            <form onSubmit={handleSignup}>
+              <input type="text" className="name ele" placeholder="Enter your name" value={signupName} onChange={(e) => setSignupName(e.target.value)}/>
+              <input type="email" className="email ele" placeholder="youremail@email.com" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)}/>
+              <input type="password" className="password ele" placeholder="password" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)}/>
+              <input type="password" className="password ele" placeholder="Confirm password" value={signupPassword2} onChange={(e) => setSignupPassword2(e.target.value)}/>
+              <button type="submit" className="clkbtn">Signup</button>
+            </form>
           </div>
         </div>
         <p className="final-text">Log in or register to track your progress</p>
@@ -28,8 +64,7 @@ const Home = () => (
       </div>
     </div>
   </BaseLayout>
-);
-    
+  )
+};
 
-  
   export default Home;
