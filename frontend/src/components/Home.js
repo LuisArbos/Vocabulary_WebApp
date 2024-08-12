@@ -1,6 +1,7 @@
 import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import BaseLayout from './BaseLayout';
-import authService from './Auth/authService';
+import authService from "./Auth/authService";
 
 const Home = () => {
   const [loginEmail, setLoginEmail] = useState('');
@@ -9,12 +10,13 @@ const Home = () => {
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [signupPassword2, setSignupPassword2] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await authService.login(loginEmail, loginPassword);
-      console.log('Success!!')
+      navigate("/en/practice")
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
       // Handle error (e.g., show error message)
@@ -24,9 +26,22 @@ const Home = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (signupPassword !== signupPassword2) {
+      console.error("Passwords do not match");
+      alert("Passwords do not match");
+      return;
+    }
+    const passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordValidation.test(signupPassword)) {
+        console.error("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.");
+        alert("Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.");
+        return;
+    }
+
     try {
       await authService.register(signupEmail, signupPassword, signupPassword2);
-      console.log('Success!!')
+      navigate("/en/practice")
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
       // Handle error (e.g., show error message)

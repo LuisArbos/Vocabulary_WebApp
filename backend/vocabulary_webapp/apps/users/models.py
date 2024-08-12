@@ -1,17 +1,18 @@
 from django.db import models
 from ..vocabulary.models import Word
+from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
-class User(models.Model):
-    username = models.CharField(max_length=50, unique=True)
-    password_hash = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class UserVocabulary(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    word = models.ForeignKey(Word, on_delete=models.CASCADE)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE) #Relate this model to the auth default so I only need to handle additional parameters.
+    streak_days = models.IntegerField(default=0)
+    languages = models.JSONField(default=list)
+    word = models.ForeignKey(Word, on_delete=models.CASCADE) #Need this to relate to word model.
     learned = models.BooleanField(default=False)
     learning_progress = models.IntegerField(default=0)
     consecutive_Correct = models.IntegerField(default=0)
+    
+
+    def __str__(self):
+        return self.user.username

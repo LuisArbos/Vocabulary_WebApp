@@ -1,6 +1,7 @@
 import React, {useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import BaseLayout from './BaseLayout';
-import authService from './Auth/authService';
+import authService from "./Auth/authService";
 
 const HomeEs = () => {
   const [loginEmail, setLoginEmail] = useState('');
@@ -9,11 +10,13 @@ const HomeEs = () => {
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [signupPassword2, setSignupPassword2] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await authService.login(loginEmail, loginPassword);
+      navigate("/es/practice")
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
       // Handle error (e.g., show error message)
@@ -23,8 +26,22 @@ const HomeEs = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    if (signupPassword !== signupPassword2) {
+      console.error("Las contraseñas no coinciden");
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+    const passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordValidation.test(signupPassword)) {
+        console.error("La contraseña debe tener al menos 8 caracteres e incluir al menos una mayúsucla, una minúscula y un número.");
+        alert("La contraseña debe tener al menos 8 caracteres e incluir al menos una mayúsucla, una minúscula y un número.");
+        return;
+    }
+    
     try {
       await authService.register(signupEmail, signupPassword, signupPassword2);
+      navigate("/es/practice")
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
       // Handle error (e.g., show error message)

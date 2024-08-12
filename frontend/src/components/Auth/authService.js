@@ -7,10 +7,11 @@ const getCookie = (name) => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/accounts/',
+  baseURL: 'http://127.0.0.1:8000/api/',
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true
 });
 
 axiosInstance.interceptors.request.use((config) => {

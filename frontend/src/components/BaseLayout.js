@@ -1,23 +1,44 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import authService from "./Auth/authService";
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const translations = {
     EN: {
         practice: "Let's Practice",
-        login: "Login"
+        login: "Login",
+        logout: "Logout",
+        profile: "Profile"
     },
     ES: {
         practice: "Practicar ahora",
-        login: "Iniciar Sesión"
+        login: "Iniciar Sesión",
+        logout: "Cerrar Sesión",
+        profile: "Perfil"
     }
 };
 
 const BaseLayout = ({ children, currentLan }) => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const lan = translations[currentLan] || translations.EN; //Default in English
+
+    useEffect(() => {
+        // Check if the user is authenticated by looking for a token or user info in localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            setIsAuthenticated(true);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        authService.logout();
+        setIsAuthenticated(false);
+        navigate('/');  // Redirect to home or login page after logout
+    };
 
     const switchLanguage = (targetLan) => {
         const path = location.pathname;
@@ -40,22 +61,22 @@ const BaseLayout = ({ children, currentLan }) => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                        <Nav.Link as={Link} to={`/${currentLan.toLowerCase()}/practice`} className="text-light">
-                            {lan.practice}
-                        </Nav.Link>
+                            <Nav.Link as={Link} to={`/${currentLan.toLowerCase()}/practice`} className="text-light">
+                                {lan.practice}
+                            </Nav.Link>
                         </Nav>
                         <Nav>
-                        <NavDropdown
-                            title={
-                            currentLan === "EN" ? (
-                                <img src="/static/img/us_flag.png" alt="Language" className="flag-icon" />) 
-                                : (
-                                <img src="/static/img/es_flag.png" alt="Language" className="flag-icon" />)
-                            }
-                            id="basic-nav-dropdown"
-                            align="end"
-                            className="text-light"
-                            >         
+                            <NavDropdown
+                                title={
+                                currentLan === "EN" ? (
+                                    <img src="/static/img/us_flag.png" alt="Language" className="flag-icon" />) 
+                                    : (
+                                    <img src="/static/img/es_flag.png" alt="Language" className="flag-icon" />)
+                                }
+                                id="basic-nav-dropdown"
+                                align="end"
+                                className="text-light"
+                                >         
                             <NavDropdown.Item as={Link} to={switchLanguage('EN')}>
                                 <img src="/static/img/us_flag.png" alt="English" className="flag-icon" />
                             </NavDropdown.Item>
@@ -63,9 +84,25 @@ const BaseLayout = ({ children, currentLan }) => {
                                 <img src="/static/img/es_flag.png" alt="Spanish" className="flag-icon" />
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link as={Link} to={currentLan === "EN" ? "/" : "/es"} className="text-light">
-                            {lan.login}
-                        </Nav.Link>
+                        {isAuthenticated ? (
+                                <NavDropdown
+                                    title={lan.profile}
+                                    id="user-nav-dropdown"
+                                    align="end"
+                                    className="text-light"
+                                >
+                                    <NavDropdown.Item as={Link} to="/profile">
+                                        {lan.profile}
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={handleLogout}>
+                                        {lan.logout}
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            ) : (
+                                <Nav.Link as={Link} to={currentLan === "EN" ? "/" : "/es"} className="text-light">
+                                    {lan.login}
+                                </Nav.Link>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

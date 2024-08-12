@@ -68,11 +68,12 @@ CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_COOKIE_SECURE = False  # Set to True in production if using HTTPS
 CSRF_COOKIE_HTTPONLY = False
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
+    'http://localhost:3000', # My React address
+    'http://127.0.0.1:3000',
 ]
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # My React address
-    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3000', # My React address
+    'http://localhost:3000',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -109,7 +110,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'vocabulary_webapp.wsgi.application'
-
+AUTH_USER_MODEL = 'auth.User'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
