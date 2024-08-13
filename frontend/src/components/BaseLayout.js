@@ -10,13 +10,15 @@ const translations = {
         practice: "Let's Practice",
         login: "Login",
         logout: "Logout",
-        profile: "Profile"
+        profile: "Profile",
+        menu: "Menu"
     },
     ES: {
         practice: "Practicar ahora",
         login: "Iniciar Sesión",
         logout: "Cerrar Sesión",
-        profile: "Perfil"
+        profile: "Perfil",
+        menu: "Menu"
     }
 };
 
@@ -36,8 +38,9 @@ const BaseLayout = ({ children, currentLan }) => {
 
     const handleLogout = () => {
         authService.logout();
+        localStorage.removeItem('user');
         setIsAuthenticated(false);
-        navigate('/');  // Redirect to home or login page after logout
+        navigate(currentLan === "EN" ? "/" : "/es");  // Redirect to home or login page after logout
     };
 
     const switchLanguage = (targetLan) => {
@@ -86,7 +89,7 @@ const BaseLayout = ({ children, currentLan }) => {
                         </NavDropdown>
                         {isAuthenticated ? (
                                 <NavDropdown
-                                    title={lan.profile}
+                                    title={lan.menu}
                                     id="user-nav-dropdown"
                                     align="end"
                                     className="text-light"

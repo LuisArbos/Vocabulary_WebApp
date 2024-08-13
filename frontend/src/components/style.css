@@ -122,16 +122,11 @@ body {
   display: flex;
   justify-content: space-around;
   padding: 20px 0;
-  transition: all 0.5s ease-in-out;
-}
-
-.form-section-move {
-  transform: translateX(-100%);
 }
 
 .login-box,
 .signup-box {
-  width: 50%;
+  width: 480px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -140,7 +135,7 @@ body {
 
 .ele {
   height: 60px;
-  width: 80%;
+  width: 384px;
   outline: none;
   border: none;
   color: #4d4d4d;
@@ -154,6 +149,48 @@ body {
   text-align: center;
   color: rgba(128, 128, 128, 0.7);
   margin-bottom: 20px;
+}
+
+/* pop ups and messages */
+.password-wrapper, 
+.email-wrapper {
+  width: 100%; /* Ensure these wrappers take full width of parent container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.password-popup {
+  position: absolute;
+  right: -220px; 
+  top: 0;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  padding: 10px;
+  border-radius: 25px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.password-popup p {
+  margin: 5px 0;
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
+.password-match-error,
+.email-error,
+.login-error {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
 }
 
 /* Responsive Design */

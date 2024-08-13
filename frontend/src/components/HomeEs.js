@@ -12,40 +12,72 @@ const HomeEs = () => {
   const [signupPassword2, setSignupPassword2] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      await authService.login(loginEmail, loginPassword);
-      navigate("/es/practice")
-      // Handle success (e.g., show a success message or redirect)
-    } catch (error) {
-      // Handle error (e.g., show error message)
-      console.error(error);
-    }
+  const [passwordValidation, setPasswordValidation] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    passwordsMatch: false,
+  });
+
+  const handlePasswordChange = (e) => {
+    const { value } = e.target;
+    setSignupPassword(value);
+
+    setPasswordValidation({
+      length: value.length >= 8,
+      uppercase: /[A-Z]/.test(value),
+      lowercase: /[a-z]/.test(value),
+      number: /[0-9]/.test(value),
+      passwordsMatch: value === signupPassword2,
+    });
+  };
+
+  const [focusedField, setFocusedField] = useState(null);//Need this to know if the user is in the password field
+  const [emailError, setEmailError] = useState(''); //Track email error
+  const [loginError, setLoginError] = useState(''); //Track login error
+
+  const handlePassword2Change = (e) => {
+    const { value } = e.target;
+    setSignupPassword2(value);
+
+    // Update match state
+    setPasswordValidation(prevState => ({
+      ...prevState,
+      passwordsMatch: value === signupPassword,
+    }));
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
-    if (signupPassword !== signupPassword2) {
-      console.error("Las contraseñas no coinciden");
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-    const passwordValidation = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if (!passwordValidation.test(signupPassword)) {
-        console.error("La contraseña debe tener al menos 8 caracteres e incluir al menos una mayúsucla, una minúscula y un número.");
-        alert("La contraseña debe tener al menos 8 caracteres e incluir al menos una mayúsucla, una minúscula y un número.");
-        return;
-    }
-    
+    setEmailError(''); //Clear previous errors
+    console.log('Signup submited')
     try {
       await authService.register(signupEmail, signupPassword, signupPassword2);
       navigate("/es/practice")
       // Handle success (e.g., show a success message or redirect)
     } catch (error) {
-      // Handle error (e.g., show error message)
+      if (error.response && error.response.data.error === "Email is already registered") {
+        setEmailError("Este email ya ha sido registrado.");
+      } else {
       console.error(error);
+      }
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoginError('');
+    try {
+      await authService.login(loginEmail, loginPassword);
+      navigate("/es/practice")
+      // Handle success (e.g., show a success message or redirect)
+    } catch (error) {
+      if (error.response && error.response.data.error === "Invalid credentials") {
+        setLoginError("Email o contraseña incorrectos.");
+      } else {
+      console.error(error);
+      }
     }
   };
 
@@ -60,15 +92,62 @@ const HomeEs = () => {
           <form onSubmit={handleLogin}>
               <input type="email" className="email ele" placeholder="tuemail@email.com" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)}/>
               <input type="password" className="password ele" placeholder="contraseña" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}/>
+              {loginError && (
+                <p className="login-error">{loginError}</p>
+              )}
               <button type="Submit" className="clkbtn">Iniciar Sesión</button>
             </form>
           </div>
           <div className="signup-box">
             <form onSubmit={handleSignup}>
               <input type="text" className="name ele" placeholder="Introduce tu nombre" value={signupName} onChange={(e) => setSignupName(e.target.value)}/>
-              <input type="email" className="email ele" placeholder="tuemail@email.com" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)}/>
-              <input type="password" className="password ele" placeholder="contraseña" value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)}/>
-              <input type="password" className="password ele" placeholder="Confirma contraseña" value={signupPassword2} onChange={(e) => setSignupPassword2(e.target.value)}/>
+              <div className="email-wrapper">
+                <input type="email" className="email ele" placeholder="tuemail@email.com" value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)}/>
+                {emailError && (
+                    <p className="email-error">{emailError}</p>
+                  )}
+              </div>
+              <div className="password-wrapper">
+                <input type="password" className="password ele" placeholder="contraseña" value={signupPassword} onFocus={() => setFocusedField('password1')} onBlur={() => setFocusedField(null)} onChange={handlePasswordChange}/>
+                {focusedField === 'password1' && (
+                    <div className="password-popup">
+                      <p className={passwordValidation.length ? 'valid' : 'invalid'}>
+                        {passwordValidation.length ? '✔' : '✘'} Mínimo 8 caracteres
+                      </p>
+                      <p className={passwordValidation.uppercase ? 'valid' : 'invalid'}>
+                        {passwordValidation.uppercase ? '✔' : '✘'} Mayúscula
+                      </p>
+                      <p className={passwordValidation.lowercase ? 'valid' : 'invalid'}>
+                        {passwordValidation.lowercase ? '✔' : '✘'} Minúscula
+                      </p>
+                      <p className={passwordValidation.number ? 'valid' : 'invalid'}>
+                        {passwordValidation.number ? '✔' : '✘'} Número
+                      </p>
+                    </div>
+                  )}
+              </div>
+              <div className="password-wrapper">
+                <input type="password" className="password ele" placeholder="Confirma contraseña" value={signupPassword2} onFocus={() => setFocusedField('password2')} onBlur={() => setFocusedField(null)} onChange={handlePassword2Change}/>
+                  {focusedField === 'password2' && (
+                    <div className="password-popup">
+                      <p className={passwordValidation.length ? 'valid' : 'invalid'}>
+                        {passwordValidation.length ? '✔' : '✘'} Mínimo 8 caracteres
+                      </p>
+                      <p className={passwordValidation.uppercase ? 'valid' : 'invalid'}>
+                        {passwordValidation.uppercase ? '✔' : '✘'} Mayúscula
+                      </p>
+                      <p className={passwordValidation.lowercase ? 'valid' : 'invalid'}>
+                        {passwordValidation.lowercase ? '✔' : '✘'} Minúscula
+                      </p>
+                      <p className={passwordValidation.number ? 'valid' : 'invalid'}>
+                        {passwordValidation.number ? '✔' : '✘'} Número
+                      </p>
+                    </div>
+                  )}
+                  {signupPassword2 && signupPassword !== signupPassword2 && (
+                      <p className="password-match-error">Las contraseñas no coinciden</p>
+                  )}
+              </div>
               <button type="submit" className="clkbtn">Crear Cuenta</button>
             </form>
           </div>

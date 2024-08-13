@@ -31,6 +31,7 @@ const register = async (email, password1, password2) => {
       password1,
       password2
     });
+    console.log('Register Succesful!')
     return response.data;
   } catch (error) {
     console.error('Registration error:', error.response ? error.response.data : error.message);
@@ -46,7 +47,10 @@ const login = async (email, password) => {
     });
     if (response.data.token) {
       localStorage.setItem('user', JSON.stringify(response.data));
+    } else{
+      console.log(response.data)
     }
+    console.log('Login Succesful!')
     return response.data;
   } catch (error) {
     console.error('Login error:', error.response ? error.response.data : error.message);

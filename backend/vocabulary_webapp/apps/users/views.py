@@ -9,6 +9,7 @@ from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
 
 def index(request):
     return render(request, 'index.html')
@@ -41,6 +42,10 @@ class SignupView(APIView):
 
     def post(self, request, format=None):
         print("Here")
+        email = request.data.get('email')
+        if User.objects.filter(email=email).exists():
+            return Response({"error": "Email is already registered"}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -57,8 +62,10 @@ class LoginView(APIView):
         user = authenticate(username=email, password=password)
         if user:
             login(request, user)
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
             # You might want to return a token or session ID here
-            return Response({"status": "Login successful"}, status=status.HTTP_200_OK)
+            return Response({"status": "Login successful", "token": access_token}, status=status.HTTP_200_OK)
         return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST) 
 
 def update_profile(request): #Temporary, not implemented yet but this is a partial function to make it work in a future.
