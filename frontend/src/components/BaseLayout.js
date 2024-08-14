@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import authService from "./Auth/authService";
-import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
 const translations = {
     EN: {
@@ -58,7 +58,9 @@ const BaseLayout = ({ children, currentLan }) => {
         <div>
             <Navbar expand="lg" className="bg-primary">
                 <Container>
-                    <Navbar.Brand as={Link} to="/" className="text-light">
+                    <Navbar.Brand as={Link} to={isAuthenticated ? `/${currentLan.toLowerCase()}/practice` 
+                                                                : `/${currentLan.toLowerCase()}`
+                                                                } className="text-light">
                         VocabApp
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -94,7 +96,7 @@ const BaseLayout = ({ children, currentLan }) => {
                                     align="end"
                                     className="text-light"
                                 >
-                                    <NavDropdown.Item as={Link} to="/profile">
+                                    <NavDropdown.Item as={Link} to={currentLan === "EN" ? "/en/profile" : "/es/profile"}>
                                         {lan.profile}
                                     </NavDropdown.Item>
                                     <NavDropdown.Item onClick={handleLogout}>

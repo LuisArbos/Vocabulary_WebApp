@@ -80,6 +80,15 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.container-language-selector {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f4f8;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .divider {
   width: 100px; /* Adjust the width as needed */
   margin: 20px auto;
